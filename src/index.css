@@ -10,3 +10,17 @@ html, body {
   display: flex;
 }
 
+/* Nav */
+
+nav{
+  height: 100vh;
+  display: flex;
+  background-color: rgb(43,43,63);
+}
+
+nav .logo-container,
+nav .controls-container {
+    display: flex;
+    padding: 40px 20px;
+}
+
