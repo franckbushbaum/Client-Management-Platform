@@ -16,11 +16,42 @@ nav{
   height: 100vh;
   display: flex;
   background-color: rgb(43,43,63);
+  color: rgb(255,255,255);
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 nav .logo-container,
 nav .controls-container {
-    display: flex;
-    padding: 40px 20px;
+  display: flex;
+  padding: 40px 20px;
+  flex-direction: column;
+}
+
+nav .logo-container img{
+  width: 50px;
+}
+
+nav .icon {
+  color: rgb(255,255,255);
+}
+
+/* Dashboard */
+
+.dashboard{
+  padding: 30px;
+  width: 100%
+}
+
+.dashboard .ticket-container {
+  height: 80vh;
+  overflow: scroll;
+}
+
+/* TicketCard */
+.ticket-card{
+  display: flex;
+  width: 100%;
 }
 
