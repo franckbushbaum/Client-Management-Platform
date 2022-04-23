@@ -3,6 +3,7 @@ import TicketCard from "../components/TicketCard";
 const Dashboard = () => {
 
     const data = [
+        
         {
             category: 'Q1 2022',
             color: 'red',
@@ -52,6 +53,16 @@ const Dashboard = () => {
             timestamp: '2022-02-11T1800'
         },       
     ]
+
+    //1 Find all unique Category in the array.
+
+    // const uniqueCategories = [
+    //     ...new Set(data?.map(({ category }) => category))
+    // ]
+
+    //2 Seperate by Category
+
+
     return(
         <>
         <div className="dashboard">
