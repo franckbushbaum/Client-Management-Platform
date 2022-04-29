@@ -7,6 +7,7 @@ import DeleteBlock from "./DeleteBlock";
 
 const TicketCard = ({ ticket, name, title, id, color }) => {
 
+//6 Ticket is the entire object. aka w
 
     return(
         <>
@@ -14,9 +15,15 @@ const TicketCard = ({ ticket, name, title, id, color }) => {
                 <Link to={`/ticket/${ticket.documentId}`} id="link">
                 <div className="ticket-color"></div>
                     <h3>{title}</h3>
-                    <AvatarDisplay />
-                    <StatusDisplay />
-                    <PriorityDisplay />
+                    <AvatarDisplay 
+                        ticket={ticket} 
+                    />
+                    <StatusDisplay
+                        status={ticket.status}
+                    />
+                    <PriorityDisplay 
+                        priority={ticket.priority}
+                    />
                     <ProgressDisplay />
                 </Link>
                 <DeleteBlock />

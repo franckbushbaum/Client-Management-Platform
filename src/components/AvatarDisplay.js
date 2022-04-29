@@ -1,3 +1,5 @@
+import blankAvatar from '../assets/blank-avatar.png'
+
 const AvatarDisplay = ({ ticket }) => {
     return(
         <>
