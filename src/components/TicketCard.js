@@ -5,22 +5,20 @@ import PriorityDisplay from "./PriorityDisplay";
 import ProgressDisplay from "./ProgressDisplay";
 import DeleteBlock from "./DeleteBlock";
 
-const TicketCard = ({ color, ticket }) => {
+const TicketCard = ({ ticket, name, title, id, color }) => {
 
-    console.log('color', color);
-    console.log('ticket', ticket);
-    
+
     return(
         <>
         <div className="ticket-card">
-                {/* <Link> */}
+                <Link to={`/ticket/${ticket.documentId}`} id="link">
                 <div className="ticket-color"></div>
-                    <h3>{ticket.title}</h3>
+                    <h3>{title}</h3>
                     <AvatarDisplay />
                     <StatusDisplay />
                     <PriorityDisplay />
                     <ProgressDisplay />
-                {/* </Link> */}
+                </Link>
                 <DeleteBlock />
         </div>
         </>

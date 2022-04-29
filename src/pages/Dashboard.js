@@ -68,6 +68,7 @@ const Dashboard = () => {
     //4 LEFT OF THE = NAME THAT IS BEING PASSED DOWN
     //5 RIGHT: WHAT IS IT CALLED HERE.
 
+
     return(
         <div className="dashboard">
             <h1>My Projects</h1>
@@ -75,6 +76,17 @@ const Dashboard = () => {
                 {data && uniqueCategories?.map((uniqueCategory, categoryIndex) => (
                     <div key={categoryIndex}>
                         <h3>{uniqueCategory}</h3>
+                        {data?.filter(ticket => 
+                             ticket.category === uniqueCategory).map((w, i) => (
+                                <TicketCard
+                                    ticket={w}
+                                    name={w.owner}
+                                    title={w.title}
+                                    id={i}
+                                    color={w.color}
+                                />
+                             ))                            
+                             }
                     </div>
                 ))}
             </div>
