@@ -1,9 +1,16 @@
-const TicketCard = () => {
+const ProgressDisplay = ({ progress }) => {
+
+    console.log('this is progress', progress)
+    
     return(
-        <>
-        <div>TicketCard</div>
-        </>
+        <div className="progress-display">
+            <div className="progress-bar">
+                <div style={{ width: progress + '%'}}>
+                    {progress}
+                </div>
+            </div>
+        </div>
     )
 }
 
-export default TicketCard;
+export default ProgressDisplay;
