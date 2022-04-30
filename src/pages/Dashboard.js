@@ -3,7 +3,7 @@ import TicketCard from "../components/TicketCard";
 const Dashboard = () => {
 
     const data = [
-        
+
         {
             category: 'Q1 2022',
             color: 'red',
@@ -51,7 +51,7 @@ const Dashboard = () => {
             progress: 10,
             description: 'Make a video about a bot',
             timestamp: '2022-02-11T1800'
-        },       
+        },
     ]
 
     //1 Find all unique Category in the array.
@@ -68,25 +68,28 @@ const Dashboard = () => {
     //4 LEFT OF THE = NAME THAT IS BEING PASSED DOWN
     //5 RIGHT: WHAT IS IT CALLED HERE.
 
+    const colors = data?.map((ticket) => {
+        return ticket.color
+    });
 
-    return(
+    return (
         <div className="dashboard">
             <h1>My Projects</h1>
             <div className="ticket-container">
                 {data && uniqueCategories?.map((uniqueCategory, categoryIndex) => (
                     <div key={categoryIndex}>
                         <h3>{uniqueCategory}</h3>
-                        {data?.filter(ticket => 
-                             ticket.category === uniqueCategory).map((w, i) => (
+                        {data?.filter(ticket =>
+                            ticket.category === uniqueCategory).map((w, i) => (
                                 <TicketCard
                                     ticket={w}
                                     name={w.owner}
                                     title={w.title}
                                     id={i}
-                                    color={w.color}
+                                    color={colors[categoryIndex] || colors[0]}
                                 />
-                             ))                            
-                             }
+                            ))
+                        }
                     </div>
                 ))}
             </div>

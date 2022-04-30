@@ -2,11 +2,11 @@ const ProgressDisplay = ({ progress }) => {
 
     console.log('this is progress', progress)
     
+    
     return(
         <div className="progress-display">
             <div className="progress-bar">
-                <div style={{ width: progress + '%'}}>
-                    {progress}
+                <div className="progress-indicator" style={{ width: progress + '%'}}>
                 </div>
             </div>
         </div>
