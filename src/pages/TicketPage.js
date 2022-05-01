@@ -1,33 +1,45 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const TicketPage = () => {
 
     const editMode = false
 
+    // const [formData, setFormData] = useState({
+    //     status: 'not started',
+    //     progress: 0,
+    //     timestamp: new Date().toISOString(),
+    //     title: '',
+    //     description: '',
+    //     category: [],
+    //     owner: '',
+    //     avatar: '',
+    // })
+
     const [formData, setFormData] = useState({
-        status: 'not started',
-        progress: 0,
-        timestamp: new Date().toISOString(),
-        title: '',
-        description: '',
-        category: [],
         owner: '',
         avatar: '',
+        title: '',
+        description: '',
+        category: '',
+        progress: 0,
+        status: 'not started',
+        timestamp: new Date().toISOString()
     })
 
     const handleChange = (propertyName) => (event) => {
-        console.log('in handleChange');
         setFormData({ ...formData, [propertyName]: event.target.value });
     };
 
     const handleSubmit = () => {
-        console.log('in Submit')
+        console.log('in Submit', formData)
     }
 
-    const categories = ['test 1', 'test 2','455','chat', '3', 323];
+    const categories = ['test 1', 'test 2', '455', 'chat', '3', 323];
 
-    console.log('formData: ', formData)
+    console.log('I am once again asking for formData', formData)
+
+    
 
     return (
         <div className="ticket">
@@ -82,7 +94,7 @@ const TicketPage = () => {
                                 id="priority-1"
                                 name="priority"
                                 type="radio"
-                                onChange={handleChange}
+                                onChange={handleChange('priority')}
                                 value={1}
                                 checked={formData.priority == 1}
                             />
@@ -91,7 +103,7 @@ const TicketPage = () => {
                                 id="priority-2"
                                 name="priority"
                                 type="radio"
-                                onChange={handleChange}
+                                onChange={handleChange('priority')}
                                 value={2}
                                 checked={formData.priority == 2}
                             />
@@ -100,7 +112,7 @@ const TicketPage = () => {
                                 id="priority-3"
                                 name="priority"
                                 type="radio"
-                                onChange={handleChange}
+                                onChange={handleChange('priority')}
                                 value={3}
                                 checked={formData.priority == 3}
                             />
@@ -109,7 +121,7 @@ const TicketPage = () => {
                                 id="priority-4"
                                 name="priority"
                                 type="radio"
-                                onChange={handleChange}
+                                onChange={handleChange('priority')}
                                 value={4}
                                 checked={formData.priority == 4}
                             />
@@ -118,14 +130,13 @@ const TicketPage = () => {
                                 id="priority-5"
                                 name="priority"
                                 type="radio"
-                                onChange={handleChange}
+                                onChange={handleChange('priority')}
                                 value={5}
                                 checked={formData.priority == 5}
                             />
                             <label htmlFor="priority-5">5</label>
-                        </div>
-
-                {editMode && <>
+                        </div>                      
+                    {/* { editMode && <> */}
                         <input
                             type="range"
                             id="progress"
@@ -133,26 +144,23 @@ const TicketPage = () => {
                             value={formData.progress}
                             min="0"
                             max="100"
-                            onChange={handleChange}
-                        />
-                      
+                            onChange={handleChange('progress')}
+                        />                     
                         <label htmlFor="progress">Progress</label>
-
                         <label>Status</label>
                         <select
                             name="status"
                             value={formData.status}
-                            onChange={handleChange}
+                            onChange={handleChange('status')}
                         >
                             <option selected={formData.status === 'done'} value={'done'}>Done</option>
-                            <option selected={formData.status === 'working on it'} value={'working on it'}>Done</option>
-                            <option selected={formData.status === 'stuck'} value={'stuck'}>Done</option>
-                            <option selected={formData.status === 'not started'} value={'not started'}>Done</option>
+                            <option selected={formData.status === 'working on it'} value={'working on it'}>Working on it</option>
+                            <option selected={formData.status === 'stuck'} value={'stuck'}>Stuck</option>
+                            <option selected={formData.status === 'not started'} value={'not started'}>Not started</option>
                         </select>
-                </>}
-                    <input type="submit"/>
+                    {/* </> } */}
+                    <input type="submit"/>                
                     </section>
-
                     <section>
                         <label htmlFor='owner'>Owner</label>
                         <input
@@ -174,10 +182,10 @@ const TicketPage = () => {
                         />
 
                         <div className="image-preview">
-                            {formData.avatar  && (
+                            {formData.avatar  && 
                                 <img src={formData.avatar} alt="image-preview" />                  
-                            )}
-                        </div>
+                            }
+                        </div>                       
                     </section>
                 </form>
             </div>
