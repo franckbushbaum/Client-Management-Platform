@@ -15,23 +15,35 @@ const TicketPage = () => {
     //     title: '',
     //     description: '',
     //     category: [],
+    //     priority: '',
     //     owner: '',
     //     avatar: '',
     // })
 
-    const [formData, setFormData] = useState({
-        owner: '',
-        avatar: '',
-        title: '',
-        description: '',
-        category: '',
-        progress: 0,
-        status: 'not started',
-        timestamp: new Date().toISOString()
+    // const [formData, setFormData] = useState({
+    //     owner: '',
+    //     avatar: '',
+    //     title: '',
+    //     description: '',
+    //     category: '',
+    //     priority: '',
+    //     progress: 0,
+    //     status: 'not started',
+    //     timestamp: new Date().toISOString()
+    // })
+
+        const [formData, setFormData] = useState({
+        
+        "progress": 0,
+        "status": "not started",
+        "timestamp": new Date().toISOString()
     })
 
+
+
     const handleChange = (propertyName) => (event) => {
-        setFormData({ ...formData, [propertyName]: event.target.value });
+        console.log('And event.target.name??', event.target.name)
+        setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
     //7 Post to backend
@@ -65,7 +77,7 @@ const TicketPage = () => {
                             id="title"
                             name="title"
                             type="text"
-                            onChange={handleChange('title')}
+                            onChange={handleChange("title")}
                             required={true}
                             value={formData.title}
                         />
@@ -74,7 +86,7 @@ const TicketPage = () => {
                             id="description"
                             name="description"
                             type="text"
-                            onChange={handleChange('description')}
+                            onChange={handleChange("description")}
                             required={true}
                             value={formData.description}
                         />
@@ -94,7 +106,7 @@ const TicketPage = () => {
                             id="new-category"
                             name="category"
                             type="text"
-                            onChange={handleChange('category')}
+                            onChange={handleChange("category")}
                             required={true}
                             value={formData.category}
                         />
@@ -104,7 +116,7 @@ const TicketPage = () => {
                                 id="priority-1"
                                 name="priority"
                                 type="radio"
-                                onChange={handleChange('priority')}
+                                onChange={handleChange("priority")}
                                 value={1}
                                 checked={formData.priority == 1}
                             />
@@ -113,7 +125,7 @@ const TicketPage = () => {
                                 id="priority-2"
                                 name="priority"
                                 type="radio"
-                                onChange={handleChange('priority')}
+                                onChange={handleChange("priority")}
                                 value={2}
                                 checked={formData.priority == 2}
                             />
