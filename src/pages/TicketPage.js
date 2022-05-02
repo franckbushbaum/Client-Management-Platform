@@ -8,7 +8,7 @@ const TicketPage = () => {
 
     const navigate = useNavigate()
 
-    // const [formData, setFormData] = useState({
+    // const [firstFormData, setFirstFormData] = useState({
     //     status: 'not started',
     //     progress: 0,
     //     timestamp: new Date().toISOString(),
@@ -38,7 +38,9 @@ const TicketPage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await axios.post('http://localhost:5000/tickets', { formData })
+        console.log('formData', formData)
+        // const response = await axios.post('http://localhost:5000/tickets',  { formData } )
+        const response = await axios.post('http://localhost:5000/tickets',  { data : formData } )
         console.log('response is', response)
         const success = response.status === 200
         if (success) {
@@ -56,9 +58,6 @@ const TicketPage = () => {
         <div className="ticket">
             <h1>{editMode ? 'Update your Ticket' : 'Create a Ticket'}</h1>
             <div className="ticket-container">
-                {/* <div>{categories?.map((category, i) => {
-                    <div>{category}</div>
-                                })}</div> */}
                 <form onSubmit={handleSubmit}>
                     <section>
                         <label htmlFor="title">Title</label>
