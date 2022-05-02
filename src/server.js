@@ -1,5 +1,5 @@
 // App Set //
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const axios = require('axios').default;
 const express = require('express');
 const cors = require('cors');
@@ -12,7 +12,14 @@ app.use(cors());
 const url = 'https://e3ad99b4-6e1c-4a82-a77a-125c6f969460-us-east-2.apps.astra.datastax.com/api/rest/v2/namespaces/tickets/collections/tasks';
 const token = 'AstraCS:MJyMkhsyGOWNhMqAAEIfzWzy:356cd418b3f6ead97fad7929a225e982e43fbb94224e30e736f6ae293c0b53b9';
 
+app.get('/', (req,res) => {
+    res.json('hi there')
+})
+
 app.post('/tickets', async (req, res) => {
+    console.log('req.params is', req.params);
+    console.log('req.user is', req.user);
+    console.log('req.body is', req.body);
     const formData = req.body.formData;
     const options = {
         method: 'POST',

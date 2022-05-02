@@ -1,9 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const TicketPage = () => {
 
     const editMode = false
+
+    const navigate = useNavigate()
 
     // const [formData, setFormData] = useState({
     //     status: 'not started',
@@ -31,13 +34,21 @@ const TicketPage = () => {
         setFormData({ ...formData, [propertyName]: event.target.value });
     };
 
-    const handleSubmit = () => {
-        console.log('in Submit', formData)
+    //7 Post to backend
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const response = await axios.post('http://localhost:5000/tickets', { formData })
+        console.log('response is', response)
+        const success = response.status === 200
+        if (success) {
+            navigate('/')
+            console.log('response is', response)
+        }
     }
 
     const categories = ['test 1', 'test 2', '455', 'chat', '3', 323];
 
-    console.log('I am once again asking for formData', formData)
 
     
 
@@ -136,7 +147,7 @@ const TicketPage = () => {
                             />
                             <label htmlFor="priority-5">5</label>
                         </div>                      
-                    {/* { editMode && <> */}
+                 { editMode && <>
                         <input
                             type="range"
                             id="progress"
@@ -158,7 +169,7 @@ const TicketPage = () => {
                             <option selected={formData.status === 'stuck'} value={'stuck'}>Stuck</option>
                             <option selected={formData.status === 'not started'} value={'not started'}>Not started</option>
                         </select>
-                    {/* </> } */}
+                </> } 
                     <input type="submit"/>                
                     </section>
                     <section>
