@@ -29,7 +29,7 @@ const TicketCard = ({ ticket, name, title, id, color }) => {
                         progress={ticket.progress}
                     />
                 </Link>
-                <DeleteBlock />
+                <DeleteBlock documentId={ticket.documentId} />
         </div>
         </>
     )

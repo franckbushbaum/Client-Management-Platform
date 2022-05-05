@@ -53,6 +53,24 @@ app.post('/tickets', async (req, res) => {
         }
     })
 
+app.delete('/tickets/:documentId', async(req,res) => {
+    const id = req.params.documentId
+    const options = {
+        method: 'DELETE',
+        headers: {
+            Accepts: 'application/json',
+            'X-Cassandrra-Token': token
+        }
+    }
+    try {
+        const response = await axios(`${url}/${id}`, options)
+        res.status(200).json(response.data)
+    } catch (err){
+        console.log('Error in DELETE', err)
+        res.status(500).json({message: err})
+    }
+})
+
 /** Listen * */
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`);
