@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import AvatarDisplay from "./AvatarDisplay";
 import StatusDisplay from "./StatusDisplay";

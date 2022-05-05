@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/small-circle-logo-only-v2.png'
 const Nav = () => {

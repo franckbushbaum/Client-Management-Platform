@@ -1,4 +1,9 @@
+import React from 'react';
+import axios from "axios";
+import { useState, useEffect, useContext } from 'react'
+import { response } from "express";
 import TicketCard from "../components/TicketCard";
+
 
 const Dashboard = () => {
 
@@ -7,23 +12,41 @@ const Dashboard = () => {
     //2 get the category of each object.
     //2 new Set is looking for all unique values and putting them in an array.
 
-    const uniqueCategories = [
-        ...new Set(data?.map(({ category }) => category))
-    ]
+    // const uniqueCategories = [
+    //     ...new Set(dataObject?.map(({ category }) => category))
+    // ]
 
     //3 Seperate by Category
 
     //4 LEFT OF THE = NAME THAT IS BEING PASSED DOWN
     //5 RIGHT: WHAT IS IT CALLED HERE.
 
-    const colors = data?.map((ticket) => {
-        return ticket.color
-    });
+    //6 Using Axios to get data back from database.
+
+    const [ tickets, setTickets] = useState(null)
+
+    useEffect(async () => {
+        const lasagna = await axios.get('http://localhost:5000/tickets')
+        console.log('lasagna', lasagna)
+        console.log('response', response);
+        
+        const dataObject = response.data.data
+
+        const arrayOfKeys = Object.keys(dataObject)
+    },[])
+
+
+
+
+
+    // const colors = data?.map((ticket) => {
+    //     return ticket.color
+    // });
 
     return (
         <div className="dashboard">
             <h1>My Projects</h1>
-            <div className="ticket-container">
+            {/* <div className="ticket-container">
                 {data && uniqueCategories?.map((uniqueCategory, categoryIndex) => (
                     <div key={categoryIndex}>
                         <h3>{uniqueCategory}</h3>
@@ -39,8 +62,8 @@ const Dashboard = () => {
                             ))
                         }
                     </div>
-                ))}
-            </div>
+                ))} 
+            </div> */}
         </div>
     )
 }

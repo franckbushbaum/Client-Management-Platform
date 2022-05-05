@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ProgressDisplay = ({ progress }) => {
 
     console.log('this is progress', progress)
