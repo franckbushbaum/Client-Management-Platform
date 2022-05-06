@@ -13,6 +13,8 @@ app.use(express.json());
 const url = 'https://e3ad99b4-6e1c-4a82-a77a-125c6f969460-us-east-2.apps.astra.datastax.com/api/rest/v2/namespaces/tickets/collections/tasks';
 const token = 'AstraCS:MJyMkhsyGOWNhMqAAEIfzWzy:356cd418b3f6ead97fad7929a225e982e43fbb94224e30e736f6ae293c0b53b9';
 
+
+//1 Get all tickets.
 app.get('/tickets', async (req,res) => {
     const options = {
         method: 'GET',
@@ -30,7 +32,27 @@ app.get('/tickets', async (req,res) => {
     }
 })
 
-//1 Post a new ticket 
+//2 Get individual ticket
+
+app.put('/tickets/:documentId', async (req,res) => {
+    const id = req.params.documentId;
+    const options = {
+        method: 'PUT',
+        headers: {
+            Accepts: 'application/json',
+            'X-Cassandra-Token': token,
+        }
+    }
+    try {
+        const response = await axios(`${url}/${id}`, options)
+        res.status(200).json(response.data)
+    } catch (err){
+        console.log('Error in PUT', err)
+        res.status(500).json({message: err})
+    }
+})
+
+//3 Post a new ticket 
 
 app.post('/tickets', async (req, res) => {
     const formData = req.body.data;
@@ -43,7 +65,6 @@ app.post('/tickets', async (req, res) => {
         },
         data: formData
     }
-
     try {
             const response = await axios(url, options)
             res.status(200).json(response.data) 
@@ -67,6 +88,27 @@ app.delete('/tickets/:documentId', async(req,res) => {
         res.status(200).json(response.data)
     } catch (err){
         console.log('Error in DELETE', err)
+        res.status(500).json({message: err})
+    }
+})
+
+app.put('/tickets/:documentId', async (req,res) => {
+    const id = req.params.documentId;
+    const data = req.body.data;
+
+    const options = {
+        method: 'PUT',
+        headers: {
+            Accepts: 'application/json',
+            'X-Cassandra-Token': token,
+        },
+        data
+    }
+    try {
+        const response = await axios(`${url}/${id}`, options)
+        res.status(200).json(response.data)
+    } catch (err){
+        console.log('Error in PUT', err)
         res.status(500).json({message: err})
     }
 })

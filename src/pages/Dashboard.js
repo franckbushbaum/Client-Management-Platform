@@ -1,6 +1,7 @@
 
 import axios from "axios";
-import { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from "react";
+// import { useState, useEffect, useContext } from 'react'
 import TicketCard from "../components/TicketCard";
 import CategoriesContext from "../context";
 
@@ -13,9 +14,8 @@ const Dashboard = () => {
     useEffect(async () => {
         const lasagna = await axios.get('http://localhost:5000/tickets')
         console.log('lasagna', lasagna)
-        console.log('response', response);
         
-        const dataObject = response.data.data
+        const dataObject = lasagna.data.data
 
         const arrayOfKeys = Object.keys(dataObject)
 
@@ -39,7 +39,7 @@ const Dashboard = () => {
         setCategories([...new Set(tickets?.map(({category}) => category))])
     },[])
 
-    console.log('formattedArray', formattedArray)
+    // console.log('formattedArray', formattedArray)
 
     //1 Find all unique Category in the array.
     //2 and how do we et the unique categories, well all im going to do is go into the data, if data exist, go into each object

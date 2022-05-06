@@ -1,56 +1,34 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import CategoriesContext from "../context";
 
-const TicketPage = () => {
-
-    const editMode = false
+const TicketPage = ({ editMode }) => {
 
     const { categories, setCategories } = useContext(CategoriesContext)
 
     const navigate = useNavigate()
 
-    // const [firstFormData, setFirstFormData] = useState({
-    //     status: 'not started',
-    //     progress: 0,
-    //     timestamp: new Date().toISOString(),
-    //     title: '',
-    //     description: '',
-    //     category: [],
-    //     priority: '',
-    //     owner: '',
-    //     avatar: '',
-    // })
+    let {id} = useParams();
 
-    // const [formData, setFormData] = useState({
-    //     owner: '',
-    //     avatar: '',
-    //     title: '',
-    //     description: '',
-    //     category: '',
-    //     priority: '',
-    //     progress: 0,
-    //     status: 'not started',
-    //     timestamp: new Date().toISOString()
-    // })
-
-        const [formData, setFormData] = useState({
-        
+    const [formData, setFormData] = useState({        
         "progress": 0,
         "status": "not started",
         "timestamp": new Date().toISOString()
     })
 
-
+    const fetchData = async () => {
+        const response = await axios.get(`http://localhost:8000/tickets/${id}`)
+        console.log('AAAAAA', response)
+        setFormData(response.data.data)        
+      }
 
     const handleChange = (propertyName) => (event) => {
         console.log('And event.target.name??', event.target.name)
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
-    //7 Post to backend
-
+    //1 Post to backend
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log('formData', formData)
@@ -63,6 +41,12 @@ const TicketPage = () => {
             console.log('response is', response)
         }
     }
+
+    useEffect(() => {
+        if (editMode) {
+          fetchData()
+        }
+      }, [])
 
     return (
         <div className="ticket">
