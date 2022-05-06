@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import CategoriesContext from "../context";
@@ -9,9 +9,9 @@ const TicketPage = ({ editMode }) => {
 
     const navigate = useNavigate()
 
-    let {id} = useParams();
+    let { id } = useParams();
 
-    const [formData, setFormData] = useState({        
+    const [formData, setFormData] = useState({
         "progress": 0,
         "status": "not started",
         "timestamp": new Date().toISOString()
@@ -20,33 +20,44 @@ const TicketPage = ({ editMode }) => {
     const fetchData = async () => {
         const response = await axios.get(`http://localhost:8000/tickets/${id}`)
         console.log('AAAAAA', response)
-        setFormData(response.data.data)        
-      }
+        setFormData(response.data.data)
+    }
 
     const handleChange = (propertyName) => (event) => {
         console.log('And event.target.name??', event.target.name)
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
-    //1 Post to backend
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('formData', formData)
-        // const response = await axios.post('http://localhost:5000/tickets',  { formData } )
-        const response = await axios.post('http://localhost:5000/tickets',  { data : formData } )
-        console.log('response is', response)
-        const success = response.status === 200
-        if (success) {
-            navigate('/')
+        if (editMode) {
+            const response = await axios.put(`http://localhost:5000/tickets/${id}`, {
+                data: formData
+            })
+            const success = response.status === 200
+            if (success) {
+                navigate('/')
+            }
+        }
+
+        if (!editMode) {
+            // const response = await axios.post('http://localhost:5000/tickets',  { formData } )
+            const response = await axios.post('http://localhost:5000/tickets', { data: formData })
             console.log('response is', response)
+            const success = response.status === 200
+            if (success) {
+                navigate('/')
+                console.log('response is', response)
+            }
         }
     }
 
     useEffect(() => {
         if (editMode) {
-          fetchData()
+            fetchData()
         }
-      }, [])
+    }, [])
 
     return (
         <div className="ticket">
@@ -139,31 +150,31 @@ const TicketPage = ({ editMode }) => {
                                 checked={formData.priority == 5}
                             />
                             <label htmlFor="priority-5">5</label>
-                        </div>                      
-                 { editMode && <>
-                        <input
-                            type="range"
-                            id="progress"
-                            name="progress"
-                            value={formData.progress}
-                            min="0"
-                            max="100"
-                            onChange={handleChange('progress')}
-                        />                     
-                        <label htmlFor="progress">Progress</label>
-                        <label>Status</label>
-                        <select
-                            name="status"
-                            value={formData.status}
-                            onChange={handleChange('status')}
-                        >
-                            <option selected={formData.status === 'done'} value={'done'}>Done</option>
-                            <option selected={formData.status === 'working on it'} value={'working on it'}>Working on it</option>
-                            <option selected={formData.status === 'stuck'} value={'stuck'}>Stuck</option>
-                            <option selected={formData.status === 'not started'} value={'not started'}>Not started</option>
-                        </select>
-                </> } 
-                    <input type="submit"/>                
+                        </div>
+                        {editMode && <>
+                            <input
+                                type="range"
+                                id="progress"
+                                name="progress"
+                                value={formData.progress}
+                                min="0"
+                                max="100"
+                                onChange={handleChange('progress')}
+                            />
+                            <label htmlFor="progress">Progress</label>
+                            <label>Status</label>
+                            <select
+                                name="status"
+                                value={formData.status}
+                                onChange={handleChange('status')}
+                            >
+                                <option selected={formData.status === 'done'} value={'done'}>Done</option>
+                                <option selected={formData.status === 'working on it'} value={'working on it'}>Working on it</option>
+                                <option selected={formData.status === 'stuck'} value={'stuck'}>Stuck</option>
+                                <option selected={formData.status === 'not started'} value={'not started'}>Not started</option>
+                            </select>
+                        </>}
+                        <input type="submit" />
                     </section>
                     <section>
                         <label htmlFor='owner'>Owner</label>
@@ -186,10 +197,10 @@ const TicketPage = ({ editMode }) => {
                         />
 
                         <div className="image-preview">
-                            {formData.avatar  && 
-                                <img src={formData.avatar} alt="image-preview" />                  
+                            {formData.avatar &&
+                                <img src={formData.avatar} alt="image-preview" />
                             }
-                        </div>                       
+                        </div>
                     </section>
                 </form>
             </div>
