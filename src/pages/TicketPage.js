@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import CategoriesContext from "../context";
+import React, { useState, useEffect, useContext } from "react"
+import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios'
+import CategoriesContext from '../context'
 
 const TicketPage = ({ editMode }) => {
 
