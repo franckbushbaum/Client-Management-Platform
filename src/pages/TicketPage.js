@@ -87,12 +87,12 @@ const TicketPage = ({ editMode }) => {
                         <select
                             name="category"
                             id="category"
-                            value={formData.category || categories[0]}
+                            // value={formData.category || categories[0]}
                             onChange={handleChange("category")}
-                            required={true}>
-                            {categories?.map((category, _index) => {
+                            required={false}>
+                            {/* {categories?.map((category, _index) => {
                                 return <option value={category} key={_index} multiple>{category}</option>
-                            })}
+                            })} */}
                         </select>
                         <label htmlFor="new-category">New Category</label>
                         <input

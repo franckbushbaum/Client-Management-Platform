@@ -1,4 +1,4 @@
-42// App Set //
+// App Set //
 const PORT = 5000;
 const axios = require('axios').default;
 const express = require('express');
@@ -95,7 +95,6 @@ app.delete('/tickets/:documentId', async(req,res) => {
 app.put('/tickets/:documentId', async (req,res) => {
     const id = req.params.documentId;
     const data = req.body.data;
-
     const options = {
         method: 'PUT',
         headers: {
